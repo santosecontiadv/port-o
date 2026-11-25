@@ -9,42 +9,33 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  /* Layout: coluna única estreita, botão do WhatsApp em destaque dentro de cada cartão de advogado. */
+  /* Layout: coluna única, estilo editorial sóbrio; botão do WhatsApp em destaque em cada cartão. */
   :root {
-    --bg: #f5f3ee;
-    --surface: #ffffff;
-    --ink: #17233b;
-    --muted: #5b6577;
-    --line: #dcd8cd;
-    --brass: #8a6a2b;
-    --wa: #1a7f4b;
+    --bg: #f6f3ec;
+    --surface: #fffdf9;
+    --ink: #14213d;
+    --muted: #666d7c;
+    --line: #e4ddcd;
+    --brass: #96723a;
+    --wa: #1f6b47;
     --wa-ink: #ffffff;
+    --shadow: 0 1px 2px rgba(20,33,61,.04), 0 10px 28px -14px rgba(20,33,61,.18);
     --font-display: "Newsreader", Georgia, "Times New Roman", serif;
     --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       color-scheme: dark;
-      --bg: #0f1624;
-      --surface: #182236;
-      --ink: #eef0f4;
-      --muted: #a4adbd;
-      --line: #2b3850;
-      --brass: #d3b068;
-      --wa: #2fa768;
-      --wa-ink: #07140d;
+      --bg: #0d1424; --surface: #141d31; --ink: #f0eee8; --muted: #a2abbb;
+      --line: #27324a; --brass: #d3b068; --wa: #2c9c63; --wa-ink: #05130c;
+      --shadow: 0 10px 28px -14px rgba(0,0,0,.6);
     }
   }
   :root[data-theme="dark"] {
     color-scheme: dark;
-    --bg: #0f1624;
-    --surface: #182236;
-    --ink: #eef0f4;
-    --muted: #a4adbd;
-    --line: #2b3850;
-    --brass: #d3b068;
-    --wa: #2fa768;
-    --wa-ink: #07140d;
+    --bg: #0d1424; --surface: #141d31; --ink: #f0eee8; --muted: #a2abbb;
+    --line: #27324a; --brass: #d3b068; --wa: #2c9c63; --wa-ink: #05130c;
+    --shadow: 0 10px 28px -14px rgba(0,0,0,.6);
   }
 
   * { box-sizing: border-box; }
@@ -54,85 +45,118 @@
     background: var(--bg);
     color: var(--ink);
     font-family: var(--font-body);
-    font-size: 17px;
-    line-height: 1.5;
+    font-size: 16px;
+    line-height: 1.55;
   }
-  .wrap { max-width: 520px; margin: 0 auto; padding: 28px 16px 40px; }
+  .wrap { max-width: 500px; margin: 0 auto; padding: 44px 20px 48px; }
 
-  header { padding: 8px 4px 24px; }
-  .kicker {
-    margin: 0 0 6px;
-    font-size: 13px;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--brass);
-    font-weight: 600;
+  header { text-align: center; padding: 0 8px 34px; }
+  header::before {
+    content: "";
+    display: block;
+    width: 44px;
+    height: 1px;
+    margin: 0 auto 22px;
+    background: var(--brass);
   }
   h1 {
-    margin: 0 0 12px;
+    margin: 0 0 14px;
     font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 34px;
-    line-height: 1.1;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 1.08;
+    letter-spacing: -.01em;
     text-wrap: balance;
   }
-  .lead { margin: 0; color: var(--muted); text-wrap: pretty; }
+  h1 em { font-style: italic; color: var(--brass); }
+  .lead { margin: 0 auto; max-width: 380px; color: var(--muted); font-size: 15.5px; text-wrap: pretty; }
 
-  .team { display: flex; flex-direction: column; gap: 14px; }
-  .team + .team { margin-top: 14px; }
-  .group-title { margin: 8px 4px 0; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--brass); font-weight: 600; }
-  .group-note { margin: -6px 4px 0; font-size: 14px; color: var(--muted); }
+  .team { display: flex; flex-direction: column; gap: 16px; }
+  .team + .team { margin-top: 16px; }
   .card {
+    position: relative;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 18px 16px 16px;
+    border-top: 2px solid var(--brass);
+    border-radius: 4px 4px 10px 10px;
+    box-shadow: var(--shadow);
+    padding: 22px 20px 20px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 18px;
   }
-  .who { display: flex; align-items: center; gap: 14px; }
-  .photo { width: 76px; height: 76px; flex: none; border-radius: 50%; object-fit: cover; background: var(--line); border: 2px solid var(--brass); }
+  .who { display: flex; align-items: center; gap: 18px; }
+  .photo {
+    width: 88px; height: 88px; flex: none;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--line);
+    outline: 1px solid var(--brass);
+    outline-offset: 4px;
+    margin: 4px;
+  }
   .card h2 {
     margin: 0;
     font-family: var(--font-display);
-    font-weight: 600;
+    font-weight: 500;
     font-size: 22px;
     line-height: 1.2;
     text-wrap: balance;
   }
-  .oab { margin: 2px 0 0; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .oab {
+    margin: 6px 0 0;
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--brass);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
 
   .btn {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    min-height: 54px;
+    min-height: 52px;
     padding: 12px 16px;
-    border-radius: 10px;
+    border-radius: 8px;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 17px;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: .02em;
+    transition: filter .15s ease, transform .15s ease;
   }
-  .btn svg { width: 22px; height: 22px; flex: none; }
+  .btn svg { width: 21px; height: 21px; flex: none; }
   .btn-wa { background: var(--wa); color: var(--wa-ink); }
+  .btn:hover { filter: brightness(1.08); }
+  .btn:active { transform: translateY(1px); }
   .btn:focus-visible, .link:focus-visible { outline: 3px solid var(--brass); outline-offset: 2px; }
 
-  .secondary { display: flex; flex-direction: column; gap: 6px; font-size: 15px; }
-  .row { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
-  .row .label { color: var(--muted); min-width: 64px; }
-  .link { color: var(--ink); text-underline-offset: 3px; text-decoration-color: var(--brass); word-break: break-word; }
+  .secondary {
+    display: flex; flex-direction: column; gap: 6px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 14.5px;
+  }
+  .row { display: flex; flex-wrap: wrap; gap: 2px 14px; align-items: baseline; }
+  .row .label { color: var(--muted); min-width: 64px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
+  .link { color: var(--ink); text-underline-offset: 3px; text-decoration-color: var(--line); word-break: break-word; }
+  .link:hover { text-decoration-color: var(--brass); }
   .num { font-variant-numeric: tabular-nums; }
 
-  footer { margin-top: 28px; padding: 0 4px; font-size: 13px; color: var(--muted); }
+  footer {
+    margin-top: 36px; padding: 22px 8px 0;
+    border-top: 1px solid var(--line);
+    text-align: center; font-size: 12.5px; color: var(--muted);
+  }
   footer p { margin: 0 0 4px; }
 </style>
 </head>
 <body>
 <main class="wrap">
   <header>
-    <h1>Estamos em atendimento externo</h1>
+    <h1>Estamos em atendimento <em>externo</em></h1>
     <p class="lead">Se você veio procurar um dos advogados deste prédio e não encontrou ninguém, escolha abaixo com quem deseja falar. Respondemos assim que possível.</p>
   </header>
 
