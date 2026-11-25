@@ -152,26 +152,71 @@
   }
   footer p { margin: 0 0 4px; }
 
-  /* Abertura: entrada suave (~1,5 s). Desligada para quem prefere menos movimento. */
+  /* Portão de entrada: duas folhas se abrem e revelam a página (~2,4 s). Toque para pular. */
+  :root { --t: 1.9s; --door: #14213d; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --door: #0a0f1c; } }
+  :root[data-theme="dark"] { --door: #0a0f1c; }
+  .gate { position: fixed; inset: 0; z-index: 100; overflow: hidden; animation: gate-off 0s linear 2.6s forwards; }
+  @keyframes gate-off { to { visibility: hidden; } }
+  .door {
+    position: absolute; top: 0; bottom: 0; width: 50.2%;
+    background:
+      linear-gradient(var(--door), var(--door)) padding-box;
+    box-shadow: inset 0 0 0 1px rgba(211,176,104,.0);
+  }
+  .door::after { /* moldura em relevo */
+    content: ""; position: absolute; inset: 22px; border: 1px solid rgba(211,176,104,.35); border-radius: 2px;
+  }
+  .door.l { left: 0; animation: open-l .95s cubic-bezier(.75,0,.2,1) 1.5s forwards; }
+  .door.r { right: 0; animation: open-r .95s cubic-bezier(.75,0,.2,1) 1.5s forwards; }
+  .door.l::after { right: 10px; }
+  .door.r::after { left: 10px; }
+  @keyframes open-l { to { transform: translateX(-102%); } }
+  @keyframes open-r { to { transform: translateX(102%); } }
+  .seal {
+    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 14px; color: #d3b068; text-align: center;
+    animation: seal-in .8s cubic-bezier(.2,.7,.2,1) .15s both, seal-out .35s ease 1.3s forwards;
+  }
+  .seal svg { width: 60px; height: 60px; }
+  .seal p { margin: 0; font-family: var(--font-display); font-style: italic; font-size: 28px; color: #f0eee8; letter-spacing: .01em; }
+  .seal span { width: 44px; height: 1px; background: #d3b068; }
+  @keyframes seal-in { from { opacity: 0; transform: translateY(10px) scale(.96); } to { opacity: 1; transform: none; } }
+  @keyframes seal-out { to { opacity: 0; transform: scale(1.04); } }
+
+  /* Entrada da página, depois que o portão abre. */
   @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
   @keyframes rule { from { width: 0; } to { width: 44px; } }
-  header::before { animation: rule .7s cubic-bezier(.2,.7,.2,1) both; }
-  h1 { animation: rise .8s cubic-bezier(.2,.7,.2,1) .25s both; }
-  .lead { animation: rise .8s cubic-bezier(.2,.7,.2,1) .45s both; }
+  header::before { animation: rule .7s cubic-bezier(.2,.7,.2,1) var(--t) both; }
+  h1 { animation: rise .8s cubic-bezier(.2,.7,.2,1) calc(var(--t) + .25s) both; }
+  .lead { animation: rise .8s cubic-bezier(.2,.7,.2,1) calc(var(--t) + .45s) both; }
   .card { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
-  .team:nth-of-type(1) .card:nth-child(1) { animation-delay: .65s; }
-  .team:nth-of-type(1) .card:nth-child(2) { animation-delay: .8s; }
-  .team:nth-of-type(2) .card { animation-delay: .95s; }
-  footer { animation: rise .8s ease 1.1s both; }
-  /* Com "reduzir movimento": só um fade suave, sem deslocamento. */
-  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  .team:nth-of-type(1) .card:nth-child(1) { animation-delay: calc(var(--t) + .65s); }
+  .team:nth-of-type(1) .card:nth-child(2) { animation-delay: calc(var(--t) + .8s); }
+  .team:nth-of-type(2) .card { animation-delay: calc(var(--t) + .95s); }
+  footer { animation: rise .8s ease calc(var(--t) + 1.1s) both; }
+
+  /* Com "reduzir movimento": o portão some num fade rápido e a página aparece direto. */
+  @keyframes fade-out { to { opacity: 0; visibility: hidden; } }
   @media (prefers-reduced-motion: reduce) {
+    :root { --t: .5s; }
+    .gate { animation: fade-out .4s ease .9s forwards; }
+    .door, .seal { animation: none; }
     header::before { animation: none; }
-    h1, .lead, .card, footer { animation-name: fade; }
+    h1, .lead, .card, footer { animation: none; }
   }
 </style>
 </head>
 <body>
+<div class="gate" id="gate" aria-hidden="true">
+  <div class="door l"></div>
+  <div class="door r"></div>
+  <div class="seal">
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="8" r="2"/><path d="M32 10v42M21 55h22M14 17h36M14 17 7 35M14 17l7 18M5 35a9 5 0 0 0 18 0ZM50 17l-7 18M50 17l7 18M41 35a9 5 0 0 0 18 0Z"/></svg>
+    <span></span>
+    <p>Seja bem-vindo(a)</p>
+  </div>
+</div>
 <main class="wrap">
   <header>
     <h1>Estamos em atendimento <em>externo</em></h1>
@@ -247,5 +292,9 @@
     <p>Conteúdo meramente informativo.</p>
   </footer>
 </main>
+<script>
+  // Toque em qualquer ponto da abertura para pular.
+  document.getElementById("gate").addEventListener("click", function () { this.style.display = "none"; document.documentElement.style.setProperty("--t", "0s"); });
+</script>
 </body>
 </html>
