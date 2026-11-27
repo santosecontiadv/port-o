@@ -2,299 +2,239 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Atendimento externo – Advogados</title>
 <meta name="description" content="Fale agora pelo WhatsApp com os advogados Eder Conti e José Reinaldo Santos Junior (Santos &amp; Conti Sociedade de Advogados) ou com a Dra. Vitória Ramos (advogada autônoma).">
+<meta name="theme-color" content="#101a30">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Atendimento externo – Advogados">
+<meta property="og:description" content="Escolha com quem deseja falar pelo WhatsApp.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23101a30'/%3E%3Cpath d='M32 12v40M21 53h22M15 19h34M15 19 8 35h14ZM49 19l-7 16h14Z' fill='none' stroke='%23d3b068' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  /* Layout: coluna única, estilo editorial sóbrio; botão do WhatsApp em destaque em cada cartão. */
+  /* Direção "A porta e a lista": o topo azul é a própria porta; abaixo, uma lista de contatos. */
   :root {
-    --bg: #f6f3ec;
-    --surface: #fffdf9;
-    --ink: #14213d;
-    --muted: #666d7c;
-    --line: #e4ddcd;
-    --brass: #96723a;
-    --wa: #1f6b47;
-    --wa-ink: #ffffff;
-    --shadow: 0 1px 2px rgba(20,33,61,.04), 0 10px 28px -14px rgba(20,33,61,.18);
-    --font-display: "Newsreader", Georgia, "Times New Roman", serif;
-    --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color-scheme: light;
+    --paper: #f5f1e8; --ink: #14213d; --muted: #555d6e; --line: #ddd4c0;
+    --brass-text: #75571f; --brass: #d3b068;
+    --night: #101a30; --night-ink: #f3f0e9; --night-muted: #bcc3d1;
+    --wa: #1f6b47; --wa-hover: #185839; --wa-ink: #fff;
+    --ease-out: cubic-bezier(.23, 1, .32, 1);
+    --ease-in-out: cubic-bezier(.77, 0, .175, 1);
+    --display: "Newsreader", Georgia, "Times New Roman", serif;
+    --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
+    :root {
       color-scheme: dark;
-      --bg: #0d1424; --surface: #141d31; --ink: #f0eee8; --muted: #a2abbb;
-      --line: #27324a; --brass: #d3b068; --wa: #2c9c63; --wa-ink: #05130c;
-      --shadow: 0 10px 28px -14px rgba(0,0,0,.6);
+      --paper: #0b1120; --ink: #f0eee8; --muted: #a7b0c0; --line: #27324a;
+      --brass-text: #d3b068; --night: #131e37;
+      --wa: #2c9c63; --wa-hover: #35ad70; --wa-ink: #05130c;
     }
-  }
-  :root[data-theme="dark"] {
-    color-scheme: dark;
-    --bg: #0d1424; --surface: #141d31; --ink: #f0eee8; --muted: #a2abbb;
-    --line: #27324a; --brass: #d3b068; --wa: #2c9c63; --wa-ink: #05130c;
-    --shadow: 0 10px 28px -14px rgba(0,0,0,.6);
   }
 
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--font-body);
-    font-size: 16px;
-    line-height: 1.55;
-  }
-  .wrap { max-width: 500px; margin: 0 auto; padding: 44px 20px 48px; }
+  html { -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.5 var(--body); }
+  .column { max-width: 520px; margin: 0 auto; padding-inline: 20px; }
+  a { touch-action: manipulation; }
+  a:focus-visible { outline: 3px solid var(--brass-text); outline-offset: 2px; }
 
-  header { text-align: center; padding: 0 8px 34px; }
-  header::before {
-    content: "";
-    display: block;
-    width: 44px;
-    height: 1px;
-    margin: 0 auto 22px;
-    background: var(--brass);
-  }
-  h1 {
-    margin: 0 0 14px;
-    font-family: var(--font-display);
-    font-weight: 500;
-    font-size: 36px;
-    line-height: 1.08;
-    letter-spacing: -.01em;
-    text-wrap: balance;
-  }
-  h1 em { font-style: italic; color: var(--brass); }
-  .lead { margin: 0 auto; max-width: 380px; color: var(--muted); font-size: 15.5px; text-wrap: pretty; }
+  /* Topo: mesma moldura das folhas da porta. */
+  .masthead { background: var(--night); color: var(--night-ink); padding: calc(10px + env(safe-area-inset-top)) 10px 10px; }
+  .frame { max-width: 500px; margin: 0 auto; padding: 16px 18px 18px; border: 1px solid rgba(211,176,104,.4); }
+  .mark { display: block; width: 28px; height: 28px; margin-bottom: 10px; color: var(--brass); }
+  h1 { margin: 0; font: 500 clamp(30px, 9.2vw, 40px)/1.02 var(--display); letter-spacing: -.018em; text-wrap: balance; }
+  h1 em { color: var(--brass); }
+  .lead { margin: 10px 0 0; max-width: 34ch; font-size: 14.5px; line-height: 1.45; color: var(--night-muted); text-wrap: pretty; }
 
-  .team { display: flex; flex-direction: column; gap: 16px; }
-  .team + .team { margin-top: 16px; }
-  .card {
-    position: relative;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-top: 2px solid var(--brass);
-    border-radius: 4px 4px 10px 10px;
-    box-shadow: var(--shadow);
-    padding: 22px 20px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
-  .who { display: flex; align-items: center; gap: 18px; }
-  .photo {
-    width: 88px; height: 88px; flex: none;
-    border-radius: 50%;
-    object-fit: cover;
-    background: var(--line);
-    outline: 1px solid var(--brass);
-    outline-offset: 4px;
-    margin: 4px;
-  }
-  .card h2 {
-    margin: 0;
-    font-family: var(--font-display);
-    font-weight: 500;
-    font-size: 22px;
-    line-height: 1.2;
-    text-wrap: balance;
-  }
-  .oab {
-    margin: 6px 0 0;
-    font-size: 12px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--brass);
-    font-weight: 600;
-    font-variant-numeric: tabular-nums;
-  }
+  /* Lista */
+  .group { padding-top: 14px; }
+  .group + .group { margin-top: 6px; border-top: 3px double var(--line); }
+  h2 { margin: 0; font: 600 11.5px/1.4 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--brass-text); }
+  ul { list-style: none; margin: 0; padding: 0; }
+  .person { padding: 10px 0; }
+  .person + .person { border-top: 1px solid var(--line); }
+  .who { display: flex; align-items: center; gap: 14px; }
+  .photo { flex: none; width: 60px; height: 60px; border-radius: 50%; overflow: hidden; background: var(--line); }
+  .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .photo.ringed img { transform: scale(1.1); } /* esconde o aro embutido no arquivo */
+  .photo.wide img { transform: scale(1.45); transform-origin: 50% 38%; } /* aproxima o rosto */
+  h3 { margin: 0; font: 500 20px/1.15 var(--display); text-wrap: balance; }
+  .oab { margin: 3px 0 0; font-size: 12.5px; letter-spacing: .04em; color: var(--muted); font-variant-numeric: tabular-nums; }
 
+  .actions { display: flex; flex-wrap: wrap; align-items: center; column-gap: 12px; margin-top: 8px; }
   .btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    min-height: 52px;
-    padding: 12px 16px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 16px;
-    letter-spacing: .02em;
-    transition: filter .15s ease, transform .15s ease;
+    flex: 1 1 180px; white-space: nowrap; min-height: 48px; display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 10px 8px; border-radius: 6px; background: var(--wa); color: var(--wa-ink);
+    font-weight: 600; font-size: 14.5px; text-decoration: none;
+    transition: transform 160ms var(--ease-out), background-color 160ms ease;
   }
-  .btn svg { width: 21px; height: 21px; flex: none; }
-  .btn-wa { background: var(--wa); color: var(--wa-ink); }
-  .btn:hover { filter: brightness(1.08); }
-  .btn:active { transform: translateY(1px); }
-  .btn:focus-visible, .link:focus-visible { outline: 3px solid var(--brass); outline-offset: 2px; }
+  .btn svg { width: 20px; height: 20px; flex: none; }
+  .btn:active { transform: scale(.97); }
 
-  .secondary {
-    display: flex; flex-direction: column; gap: 6px;
-    padding-top: 16px;
-    border-top: 1px solid var(--line);
-    font-size: 14.5px;
+  .link {
+    display: inline-flex; align-items: center; min-height: 44px; color: var(--ink);
+    font-size: 14px; text-underline-offset: 4px; text-decoration-thickness: 1px;
+    text-decoration-color: color-mix(in srgb, var(--brass-text) 55%, transparent);
+    transition: text-decoration-color 160ms ease, opacity 160ms ease;
   }
-  .row { display: flex; flex-wrap: wrap; gap: 2px 14px; align-items: baseline; }
-  .row .label { color: var(--muted); min-width: 64px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
-  .link { color: var(--ink); text-underline-offset: 3px; text-decoration-color: var(--line); word-break: break-word; }
-  .link:hover { text-decoration-color: var(--brass); }
-  .num { font-variant-numeric: tabular-nums; }
+  .link:active { opacity: .6; }
+  .phone { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .mail { overflow-wrap: anywhere; }
+  .group-mail { display: flex; flex-wrap: wrap; align-items: center; column-gap: 10px; margin: 0; border-top: 1px solid var(--line); }
+  .group-mail span { font-size: 13px; color: var(--muted); }
+  .person > .mail { margin-bottom: -8px; }
 
-  footer {
-    margin-top: 36px; padding: 22px 8px 0;
-    border-top: 1px solid var(--line);
-    text-align: center; font-size: 12.5px; color: var(--muted);
+  @media (max-width: 379px) {
+    .column { padding-inline: 14px; }
+    .actions { column-gap: 10px; }
+    .btn { font-size: 14px; gap: 6px; padding-inline: 4px; }
+    .phone { font-size: 13.5px; }
   }
-  footer p { margin: 0 0 4px; }
 
-  /* Portão de entrada: duas folhas se abrem e revelam a página (~2,4 s). Toque para pular. */
-  :root { --t: 1.9s; --door: #14213d; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --door: #0a0f1c; } }
-  :root[data-theme="dark"] { --door: #0a0f1c; }
-  .gate { position: fixed; inset: 0; z-index: 100; overflow: hidden; animation: gate-off 0s linear 2.6s forwards; }
+  /* Altura útil curta (barras do navegador): compacta para o contato aparecer logo. */
+  @media (max-height: 760px) {
+    .mark { display: none; }
+    .frame { padding-block: 12px 14px; }
+    .group { padding-top: 12px; }
+    .person { padding-block: 8px; }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .btn:hover { background: var(--wa-hover); }
+    .link:hover { text-decoration-color: currentColor; }
+  }
+
+  footer { margin-top: 16px; padding-top: 18px; padding-bottom: calc(32px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  footer p { margin: 0 auto 6px; max-width: 52ch; }
+
+  /* Abertura: 900 ms no total, uma vez por sessão. Toque para pular.
+     A página já está montada atrás da porta. Sem JavaScript, o CSS também a retira. */
+  .gate { position: fixed; inset: 0; z-index: 10; overflow: hidden; cursor: pointer; animation: gate-off 0s linear 900ms forwards; }
+  .seen .gate { display: none; }
+  .door { position: absolute; top: 0; bottom: 0; width: 50.2%; background: #101a30; }
+  .door::after { content: ""; position: absolute; top: 10px; bottom: 10px; border: 1px solid rgba(211,176,104,.4); }
+  .door.l { left: 0; animation: open-l 650ms var(--ease-in-out) 250ms forwards; }
+  .door.r { right: 0; animation: open-r 650ms var(--ease-in-out) 250ms forwards; }
+  .door.l::after { left: 10px; right: 6px; }
+  .door.r::after { left: 6px; right: 10px; }
+  .seal { position: absolute; top: 50%; left: 50%; width: 76px; height: 76px; margin: -38px; padding: 14px; border: 1px solid #d3b068; border-radius: 50%; background: #101a30; color: #d3b068; animation: fade 200ms ease 220ms forwards; }
+  .seal svg { display: block; width: 100%; height: 100%; }
+  @keyframes open-l { to { transform: translateX(-101%); } }
+  @keyframes open-r { to { transform: translateX(101%); } }
+  @keyframes fade { to { opacity: 0; } }
   @keyframes gate-off { to { visibility: hidden; } }
-  .door {
-    position: absolute; top: 0; bottom: 0; width: 50.2%;
-    background:
-      linear-gradient(var(--door), var(--door)) padding-box;
-    box-shadow: inset 0 0 0 1px rgba(211,176,104,.0);
-  }
-  .door::after { /* moldura em relevo */
-    content: ""; position: absolute; inset: 22px; border: 1px solid rgba(211,176,104,.35); border-radius: 2px;
-  }
-  .door.l { left: 0; animation: open-l .95s cubic-bezier(.75,0,.2,1) 1.5s forwards; }
-  .door.r { right: 0; animation: open-r .95s cubic-bezier(.75,0,.2,1) 1.5s forwards; }
-  .door.l::after { right: 10px; }
-  .door.r::after { left: 10px; }
-  @keyframes open-l { to { transform: translateX(-102%); } }
-  @keyframes open-r { to { transform: translateX(102%); } }
-  .seal {
-    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 14px; color: #d3b068; text-align: center;
-    animation: seal-in .8s cubic-bezier(.2,.7,.2,1) .15s both, seal-out .35s ease 1.3s forwards;
-  }
-  .seal svg { width: 60px; height: 60px; }
-  .seal p { margin: 0; font-family: var(--font-display); font-style: italic; font-size: 28px; color: #f0eee8; letter-spacing: .01em; }
-  .seal span { width: 44px; height: 1px; background: #d3b068; }
-  @keyframes seal-in { from { opacity: 0; transform: translateY(10px) scale(.96); } to { opacity: 1; transform: none; } }
-  @keyframes seal-out { to { opacity: 0; transform: scale(1.04); } }
 
-  /* Entrada da página, depois que o portão abre. */
-  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-  @keyframes rule { from { width: 0; } to { width: 44px; } }
-  header::before { animation: rule .7s cubic-bezier(.2,.7,.2,1) var(--t) both; }
-  h1 { animation: rise .8s cubic-bezier(.2,.7,.2,1) calc(var(--t) + .25s) both; }
-  .lead { animation: rise .8s cubic-bezier(.2,.7,.2,1) calc(var(--t) + .45s) both; }
-  .card { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
-  .team:nth-of-type(1) .card:nth-child(1) { animation-delay: calc(var(--t) + .65s); }
-  .team:nth-of-type(1) .card:nth-child(2) { animation-delay: calc(var(--t) + .8s); }
-  .team:nth-of-type(2) .card { animation-delay: calc(var(--t) + .95s); }
-  footer { animation: rise .8s ease calc(var(--t) + 1.1s) both; }
-
-  /* Com "reduzir movimento": o portão some num fade rápido e a página aparece direto. */
-  @keyframes fade-out { to { opacity: 0; visibility: hidden; } }
+  /* Movimento reduzido: sem deslocamento, só um fade curto. */
   @media (prefers-reduced-motion: reduce) {
-    :root { --t: .5s; }
-    .gate { animation: fade-out .4s ease .9s forwards; }
+    .gate { animation: fade 200ms ease 150ms forwards, gate-off 0s linear 350ms forwards; }
     .door, .seal { animation: none; }
-    header::before { animation: none; }
-    h1, .lead, .card, footer { animation: none; }
+    .btn { transition: background-color 160ms ease; }
+    .btn:active { transform: none; opacity: .8; }
   }
 </style>
+<script>
+  // Mostra a porta só na primeira visita da sessão.
+  try {
+    if (sessionStorage.getItem("porta")) document.documentElement.className = "seen";
+    else sessionStorage.setItem("porta", "1");
+  } catch (e) {}
+</script>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-2.9-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.1 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.900 11.900 0 0 0 4.600 4c1.700.7 2.400.8 3.200.7a2.700 2.700 0 0 0 1.800-1.300 2.200 2.200 0 0 0 .2-1.300c-.1-.1-.3-.2-.5-.3z"/></symbol>
+  <symbol id="i-scales" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="8" r="2"/><path d="M32 10v42M21 55h22M14 17h36M14 17 7 35M14 17l7 18M5 35a9 5 0 0 0 18 0ZM50 17l-7 18M50 17l7 18M41 35a9 5 0 0 0 18 0Z"/></g></symbol>
+</svg>
 <div class="gate" id="gate" aria-hidden="true">
   <div class="door l"></div>
   <div class="door r"></div>
-  <div class="seal">
-    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="8" r="2"/><path d="M32 10v42M21 55h22M14 17h36M14 17 7 35M14 17l7 18M5 35a9 5 0 0 0 18 0ZM50 17l-7 18M50 17l7 18M41 35a9 5 0 0 0 18 0Z"/></svg>
-    <span></span>
-    <p>Seja bem-vindo(a)</p>
-  </div>
+  <div class="seal"><svg><use href="#i-scales"/></svg></div>
 </div>
-<main class="wrap">
-  <header>
+
+<header class="masthead">
+  <div class="frame">
+    <svg class="mark" aria-hidden="true"><use href="#i-scales"/></svg>
     <h1>Estamos em atendimento <em>externo</em></h1>
-    <p class="lead">Deixe sua mensagem.</p>
-  </header>
+    <p class="lead">Escolha com quem deseja falar. A mensagem do WhatsApp já vem pronta.</p>
+  </div>
+</header>
 
-  <section class="team" aria-label="Santos &amp; Conti Sociedade de Advogados">
-
-    <article class="card">
-      <div class="who">
-        <img class="photo" src="fotos/eder-conti.jpg" width="76" height="76" alt="">
-        <div>
-        <h2>Dr. Eder Batista Conti da Silva</h2>
-        <p class="oab">OAB/SP 307.844</p>
-      </div>
-      </div>
-      <a class="btn btn-wa" href="https://wa.me/5517992669042?text=Ol%C3%A1%2C%20Dr.%20Eder.%0AEstive%20no%20escrit%C3%B3rio%20mas%20vi%20que%20est%C3%A1%20em%20trabalho%20externo.%0AQuando%20puder%20me%20contate.%0AObrigado%28a%29.">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-2.9-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.1 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.900 11.900 0 0 0 4.600 4c1.700.7 2.400.8 3.200.7a2.700 2.700 0 0 0 1.800-1.300 2.200 2.200 0 0 0 .2-1.300c-.1-.1-.3-.2-.5-.3z"/></svg>
-        Chamar no WhatsApp
-      </a>
-      <div class="secondary">
-        <div class="row"><span class="label">Telefone</span><a class="link num" href="tel:+5517992669042">(17) 99266-9042</a></div>
-        <div class="row"><span class="label">E-mail</span><a class="link" href="mailto:contato@santosecontiadv.com.br">contato@santosecontiadv.com.br</a></div>
-      </div>
-    </article>
-
-    <article class="card">
-      <div class="who">
-        <img class="photo" src="fotos/jose-reinaldo.jpg" width="76" height="76" alt="">
-        <div>
-        <h2>Dr. José Reinaldo dos Santos Junior</h2>
-        <p class="oab">OAB/SP 446.541</p>
-      </div>
-      </div>
-      <a class="btn btn-wa" href="https://wa.me/5517999792729?text=Ol%C3%A1%2C%20Dr.%20Jos%C3%A9%20Reinaldo.%0AEstive%20no%20escrit%C3%B3rio%20mas%20vi%20que%20est%C3%A1%20em%20trabalho%20externo.%0AQuando%20puder%20me%20contate.%0AObrigado%28a%29.">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-2.9-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.1 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.900 11.900 0 0 0 4.600 4c1.700.7 2.400.8 3.200.7a2.700 2.700 0 0 0 1.800-1.300 2.200 2.200 0 0 0 .2-1.300c-.1-.1-.3-.2-.5-.3z"/></svg>
-        Chamar no WhatsApp
-      </a>
-      <div class="secondary">
-        <div class="row"><span class="label">Telefone</span><a class="link num" href="tel:+5517999792729">(17) 99979-2729</a></div>
-        <div class="row"><span class="label">E-mail</span><a class="link" href="mailto:contato@santosecontiadv.com.br">contato@santosecontiadv.com.br</a></div>
-      </div>
-    </article>
-
+<main class="column">
+  <section class="group" aria-labelledby="g-firm">
+    <h2 id="g-firm">Santos &amp; Conti Sociedade de Advogados</h2>
+    <ul>
+      <li class="person">
+        <div class="who">
+          <span class="photo ringed"><img src="fotos/eder-conti.jpg" width="60" height="60" alt=""></span>
+          <div>
+            <h3>Dr. Eder Batista Conti da Silva</h3>
+            <p class="oab">OAB/SP 307.844</p>
+          </div>
+        </div>
+        <div class="actions">
+          <a class="btn" href="https://wa.me/5517992669042?text=Ol%C3%A1%2C%20Dr.%20Eder.%0AEstive%20no%20escrit%C3%B3rio%20mas%20vi%20que%20est%C3%A1%20em%20trabalho%20externo.%0AQuando%20puder%20me%20contate.%0AObrigado%28a%29." aria-label="Chamar no WhatsApp: Dr. Eder">
+            <svg aria-hidden="true"><use href="#i-wa"/></svg>
+            Chamar no WhatsApp
+          </a>
+          <a class="link phone" href="tel:+5517992669042" aria-label="Ligar para Dr. Eder: (17) 99266-9042">(17) 99266-9042</a>
+        </div>
+      </li>
+      <li class="person">
+        <div class="who">
+          <span class="photo wide"><img src="fotos/jose-reinaldo.jpg" width="60" height="60" alt=""></span>
+          <div>
+            <h3>Dr. José Reinaldo dos Santos Junior</h3>
+            <p class="oab">OAB/SP 446.541</p>
+          </div>
+        </div>
+        <div class="actions">
+          <a class="btn" href="https://wa.me/5517999792729?text=Ol%C3%A1%2C%20Dr.%20Jos%C3%A9%20Reinaldo.%0AEstive%20no%20escrit%C3%B3rio%20mas%20vi%20que%20est%C3%A1%20em%20trabalho%20externo.%0AQuando%20puder%20me%20contate.%0AObrigado%28a%29." aria-label="Chamar no WhatsApp: Dr. José Reinaldo">
+            <svg aria-hidden="true"><use href="#i-wa"/></svg>
+            Chamar no WhatsApp
+          </a>
+          <a class="link phone" href="tel:+5517999792729" aria-label="Ligar para Dr. José Reinaldo: (17) 99979-2729">(17) 99979-2729</a>
+        </div>
+      </li>
+    </ul>
+    <p class="group-mail"><span>E-mail do escritório</span><a class="link mail" href="mailto:contato@santosecontiadv.com.br">contato@santosecontiadv.com.br</a></p>
   </section>
 
-  <section class="team" aria-label="Advogada autônoma">
-
-    <article class="card">
-      <div class="who">
-        <img class="photo" src="fotos/vitoria-ramos.jpg" width="76" height="76" alt="">
-        <div>
-        <h2>Dra. Vitória Aparecida Ramos dos Santos</h2>
-        <p class="oab">OAB/SP 540.059</p>
-      </div>
-      </div>
-      <a class="btn btn-wa" href="https://wa.me/5517991156935?text=Ol%C3%A1%2C%20Dra.%20Vit%C3%B3ria.%0AEstive%20no%20escrit%C3%B3rio%20mas%20vi%20que%20est%C3%A1%20em%20trabalho%20externo.%0AQuando%20puder%20me%20contate.%0AObrigado%28a%29.">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-2.9-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.1 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.900 11.900 0 0 0 4.600 4c1.700.7 2.400.8 3.200.7a2.700 2.700 0 0 0 1.800-1.300 2.200 2.200 0 0 0 .2-1.300c-.1-.1-.3-.2-.5-.3z"/></svg>
-        Chamar no WhatsApp
-      </a>
-      <div class="secondary">
-        <div class="row"><span class="label">Telefone</span><a class="link num" href="tel:+5517991156935">(17) 99115-6935</a></div>
-        <div class="row"><span class="label">E-mail</span><a class="link" href="mailto:vitoriaramosadgv@gmail.com">vitoriaramosadgv@gmail.com</a></div>
-      </div>
-    </article>
-
+  <section class="group" aria-labelledby="g-solo">
+    <h2 id="g-solo">Advogada autônoma</h2>
+    <ul>
+      <li class="person">
+        <div class="who">
+          <span class="photo"><img src="fotos/vitoria-ramos.jpg" width="60" height="60" alt=""></span>
+          <div>
+            <h3>Dra. Vitória Aparecida Ramos dos Santos</h3>
+            <p class="oab">OAB/SP 540.059</p>
+          </div>
+        </div>
+        <div class="actions">
+          <a class="btn" href="https://wa.me/5517991156935?text=Ol%C3%A1%2C%20Dra.%20Vit%C3%B3ria.%0AEstive%20no%20escrit%C3%B3rio%20mas%20vi%20que%20est%C3%A1%20em%20trabalho%20externo.%0AQuando%20puder%20me%20contate.%0AObrigado%28a%29." aria-label="Chamar no WhatsApp: Dra. Vitória">
+            <svg aria-hidden="true"><use href="#i-wa"/></svg>
+            Chamar no WhatsApp
+          </a>
+          <a class="link phone" href="tel:+5517991156935" aria-label="Ligar para Dra. Vitória: (17) 99115-6935">(17) 99115-6935</a>
+        </div>
+        <a class="link mail" href="mailto:vitoriaramosadgv@gmail.com">vitoriaramosadgv@gmail.com</a>
+      </li>
+    </ul>
   </section>
-
-  <!-- Quando tiver, acrescente aqui endereço e horário de atendimento. -->
-
-  <footer>
-    <p>Por sigilo, não envie documentos nem detalhes do caso por este site. Conte apenas o essencial na primeira mensagem.</p>
-    <p>Conteúdo meramente informativo.</p>
-  </footer>
 </main>
+
+<!-- Quando tiver, acrescente aqui endereço e horário de atendimento. -->
+
+<footer class="column">
+  <p>Por sigilo, não envie documentos nem detalhes do caso por este site. Conte apenas o essencial na primeira mensagem.</p>
+  <p>Conteúdo meramente informativo.</p>
+</footer>
 <script>
-  // Toque em qualquer ponto da abertura para pular.
-  document.getElementById("gate").addEventListener("click", function () { this.style.display = "none"; document.documentElement.style.setProperty("--t", "0s"); });
+  document.getElementById("gate").addEventListener("click", function () { this.style.display = "none"; });
 </script>
 </body>
 </html>
