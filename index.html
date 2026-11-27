@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Atendimento externo – Advogados</title>
-<meta name="description" content="Fale agora pelo WhatsApp com os advogados Eder Conti e José Reinaldo Santos Junior (Santos &amp; Conti Sociedade de Advogados) ou com a Dra. Vitória Ramos (advogada autônoma).">
+<meta name="description" content="Fale agora pelo WhatsApp com os advogados Eder Conti, José Reinaldo Santos Junior e Vitória Ramos.">
 <meta name="theme-color" content="#101a30">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Atendimento externo – Advogados">
@@ -51,10 +51,8 @@
   .lead { margin: 10px 0 0; max-width: 34ch; font-size: 14.5px; line-height: 1.45; color: var(--night-muted); text-wrap: pretty; }
 
   /* Lista */
-  .group { padding-top: 14px; }
-  .group + .group { margin-top: 6px; border-top: 3px double var(--line); }
-  h2 { margin: 0; font: 600 11.5px/1.4 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--brass-text); }
-  ul { list-style: none; margin: 0; padding: 0; }
+  .people { list-style: none; margin: 0; padding: 4px 0 0; }
+
   .person { padding: 10px 0; }
   .person + .person { border-top: 1px solid var(--line); }
   .who { display: flex; align-items: center; gap: 14px; }
@@ -84,8 +82,6 @@
   .link:active { opacity: .6; }
   .phone { font-variant-numeric: tabular-nums; white-space: nowrap; }
   .mail { overflow-wrap: anywhere; }
-  .group-mail { display: flex; flex-wrap: wrap; align-items: center; column-gap: 10px; margin: 0; border-top: 1px solid var(--line); }
-  .group-mail span { font-size: 13px; color: var(--muted); }
   .person > .mail { margin-bottom: -8px; }
 
   @media (max-width: 379px) {
@@ -99,8 +95,13 @@
   @media (max-height: 760px) {
     .mark { display: none; }
     .frame { padding-block: 12px 14px; }
-    .group { padding-top: 12px; }
-    .person { padding-block: 8px; }
+    .person { padding-block: 4px; }
+    .photo { width: 52px; height: 52px; }
+    h3 { font-size: 18px; }
+    .oab { margin-top: 1px; }
+    .actions { margin-top: 4px; }
+    .person > .mail { margin-block: -2px -4px; }
+    .lead { margin-top: 6px; }
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -164,9 +165,7 @@
 </header>
 
 <main class="column">
-  <section class="group" aria-labelledby="g-firm">
-    <h2 id="g-firm">Santos &amp; Conti Sociedade de Advogados</h2>
-    <ul>
+  <ul class="people" aria-label="Advogados">
       <li class="person">
         <div class="who">
           <span class="photo ringed"><img src="fotos/eder-conti.jpg" width="60" height="60" alt=""></span>
@@ -182,6 +181,7 @@
           </a>
           <a class="link phone" href="tel:+5517992669042" aria-label="Ligar para Dr. Eder: (17) 99266-9042">(17) 99266-9042</a>
         </div>
+        <a class="link mail" href="mailto:contato@santosecontiadv.com.br">contato@santosecontiadv.com.br</a>
       </li>
       <li class="person">
         <div class="who">
@@ -198,14 +198,8 @@
           </a>
           <a class="link phone" href="tel:+5517999792729" aria-label="Ligar para Dr. José Reinaldo: (17) 99979-2729">(17) 99979-2729</a>
         </div>
+        <a class="link mail" href="mailto:contato@santosecontiadv.com.br">contato@santosecontiadv.com.br</a>
       </li>
-    </ul>
-    <p class="group-mail"><span>E-mail do escritório</span><a class="link mail" href="mailto:contato@santosecontiadv.com.br">contato@santosecontiadv.com.br</a></p>
-  </section>
-
-  <section class="group" aria-labelledby="g-solo">
-    <h2 id="g-solo">Advogada autônoma</h2>
-    <ul>
       <li class="person">
         <div class="who">
           <span class="photo"><img src="fotos/vitoria-ramos.jpg" width="60" height="60" alt=""></span>
@@ -223,8 +217,7 @@
         </div>
         <a class="link mail" href="mailto:vitoriaramosadgv@gmail.com">vitoriaramosadgv@gmail.com</a>
       </li>
-    </ul>
-  </section>
+  </ul>
 </main>
 
 <!-- Quando tiver, acrescente aqui endereço e horário de atendimento. -->
