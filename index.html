@@ -56,11 +56,11 @@
   .person { padding: 10px 0; }
   .person + .person { border-top: 1px solid var(--line); }
   .who { display: flex; align-items: center; gap: 14px; }
-  .photo { flex: none; width: 60px; height: 60px; border-radius: 50%; overflow: hidden; background: var(--line); }
+  .photo { flex: none; width: 120px; height: 120px; border-radius: 50%; overflow: hidden; background: var(--line); }
   .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .photo.ringed img { transform: scale(1.1); } /* esconde o aro embutido no arquivo */
   .photo.wide img { transform: scale(1.45); transform-origin: 50% 38%; } /* aproxima o rosto */
-  .photo.initials { display: grid; place-items: center; background: #101a30; color: #d3b068; font: 500 19px/1 var(--display); letter-spacing: .04em; }
+  .photo.initials { display: grid; place-items: center; background: #101a30; color: #d3b068; font: 500 38px/1 var(--display); letter-spacing: .04em; }
   h3 { margin: 0; font: 500 20px/1.15 var(--display); text-wrap: balance; }
   .oab { margin: 3px 0 0; font-size: 12.5px; letter-spacing: .04em; color: var(--muted); font-variant-numeric: tabular-nums; }
 
@@ -97,7 +97,7 @@
     .mark { display: none; }
     .frame { padding-block: 12px 14px; }
     .person { padding-block: 4px; }
-    .photo { width: 52px; height: 52px; }
+    .photo { width: 104px; height: 104px; }
     h3 { font-size: 18px; }
     .oab { margin-top: 1px; }
     .actions { margin-top: 4px; }
@@ -169,7 +169,7 @@
   <ul class="people" aria-label="Advogados">
       <li class="person">
         <div class="who">
-          <span class="photo ringed"><img src="fotos/eder-conti.jpg" width="60" height="60" alt=""></span>
+          <span class="photo ringed"><img src="fotos/eder-conti.jpg" width="120" height="120" alt=""></span>
           <div>
             <h3>Dr. Eder Batista Conti da Silva</h3>
             <p class="oab">OAB/SP 307.844</p>
@@ -186,7 +186,7 @@
       </li>
       <li class="person">
         <div class="who">
-          <span class="photo wide"><img src="fotos/jose-reinaldo.jpg" width="60" height="60" alt=""></span>
+          <span class="photo wide"><img src="fotos/jose-reinaldo.jpg" width="120" height="120" alt=""></span>
           <div>
             <h3>Dr. José Reinaldo dos Santos Junior</h3>
             <p class="oab">OAB/SP 446.541</p>
@@ -203,7 +203,7 @@
       </li>
       <li class="person">
         <div class="who">
-          <span class="photo"><img src="fotos/vitoria-ramos.jpg" width="60" height="60" alt=""></span>
+          <span class="photo"><img src="fotos/vitoria-ramos.jpg" width="120" height="120" alt=""></span>
           <div>
             <h3>Dra. Vitória Aparecida Ramos dos Santos</h3>
             <p class="oab">OAB/SP 540.059</p>
@@ -220,7 +220,7 @@
       </li>
       <li class="person">
         <div class="who">
-          <!-- Foto pendente: trocar as iniciais por <img src="fotos/graziele-torres.jpg" width="60" height="60" alt=""> -->
+          <!-- Foto pendente: trocar as iniciais por <img src="fotos/graziele-torres.jpg" width="120" height="120" alt=""> -->
           <span class="photo initials" aria-hidden="true">GT</span>
           <div>
             <h3>Dra. Graziele Torres de Andrade</h3>
@@ -237,7 +237,7 @@
       </li>
       <li class="person">
         <div class="who">
-          <!-- Foto pendente: trocar as iniciais por <img src="fotos/gabriela-torres.jpg" width="60" height="60" alt=""> -->
+          <!-- Foto pendente: trocar as iniciais por <img src="fotos/gabriela-torres.jpg" width="120" height="120" alt=""> -->
           <span class="photo initials" aria-hidden="true">GL</span>
           <div>
             <h3>Dra. Gabriela Torres de Andrade Lago</h3>
