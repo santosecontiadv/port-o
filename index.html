@@ -51,9 +51,10 @@
   .lead { margin: 10px 0 0; max-width: 34ch; font-size: 14.5px; line-height: 1.45; color: var(--night-muted); text-wrap: pretty; }
 
   /* Lista */
-  .people { list-style: none; margin: 0; padding: 4px 0 0; }
+  .people { list-style: none; margin: 0; padding: 0; }
 
-  .person { padding: 10px 0; }
+  .person { padding: 32px 0; }
+  .person:first-child { padding-top: 22px; }
   .person + .person { border-top: 1px solid var(--line); }
   .who { display: flex; align-items: center; gap: 14px; }
   .photo { flex: none; width: 120px; height: 120px; border-radius: 50%; overflow: hidden; background: var(--line); }
@@ -64,7 +65,7 @@
   h3 { margin: 0; font: 500 20px/1.15 var(--display); text-wrap: balance; }
   .oab { margin: 3px 0 0; font-size: 12.5px; letter-spacing: .04em; color: var(--muted); font-variant-numeric: tabular-nums; }
 
-  .actions { display: flex; flex-wrap: wrap; align-items: center; column-gap: 12px; margin-top: 8px; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; column-gap: 12px; margin-top: 16px; }
   .btn {
     flex: 1 1 180px; white-space: nowrap; min-height: 48px; display: flex; align-items: center; justify-content: center; gap: 8px;
     padding: 10px 8px; border-radius: 6px; background: var(--wa); color: var(--wa-ink);
@@ -83,7 +84,7 @@
   .link:active { opacity: .6; }
   .phone { font-variant-numeric: tabular-nums; white-space: nowrap; }
   .mail { overflow-wrap: anywhere; }
-  .person > .mail { margin-bottom: -8px; }
+  .person > .mail { margin: 2px 0 -12px; } /* iguala o respiro com e sem e-mail */
 
   @media (max-width: 379px) {
     .column { padding-inline: 14px; }
@@ -96,12 +97,13 @@
   @media (max-height: 760px) {
     .mark { display: none; }
     .frame { padding-block: 12px 14px; }
-    .person { padding-block: 4px; }
+    .person { padding-block: 24px; }
+    .person:first-child { padding-top: 14px; }
     .photo { width: 104px; height: 104px; }
     h3 { font-size: 18px; }
     .oab { margin-top: 1px; }
-    .actions { margin-top: 4px; }
-    .person > .mail { margin-block: -2px -4px; }
+    .actions { margin-top: 12px; }
+    .person > .mail { margin-block: 0 -12px; }
     .lead { margin-top: 6px; }
   }
 
@@ -110,7 +112,7 @@
     .link:hover { text-decoration-color: currentColor; }
   }
 
-  footer { margin-top: 16px; padding-top: 18px; padding-bottom: calc(32px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  footer { margin-top: 0; padding-top: 18px; padding-bottom: calc(32px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
   footer p { margin: 0 auto 6px; max-width: 52ch; }
 
   /* Abertura: 900 ms no total, uma vez por sessão. Toque para pular.
